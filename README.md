@@ -2,6 +2,17 @@
 
 A rede social surgiu a partir de um bootcamp da rocketseat o NLW Space Time, onde fizemos um create e um read de memorias. Ao finalizar o bootcamp o instrutor Diego Fernandes da aula deu alguns desafios, tais como finalizar o CRUD e tornar a memória como publica, para todos que fizerem cadastro na plataforma possam visualizar. Eu concluí os desafios, mas acredito que a aplicação pode ir mais longe, daí estou adicionando mais funcionalidades a plataforma, tais como enviar várias imagens na postagem, título e descrição da postagem, comentários nas postagens, perfil pessoal e entre várias outras novas features que irei ir adicionando.
 
+## Imagens do sistema
+
+## Home
+![Cover](./.github/home.png)
+
+## Home com Login
+![Cover](./.github/homeWithLogin.png)
+
+## Detalhes
+![Cover](./.github/detailsMemory.png)
+
 ## Executando Front-end
 ```sh
 npm install
