@@ -9,6 +9,15 @@ export function Copyright() {
         href="https://rocketseat.com.br"
       >
         Rocketseat
+      </a>{' '}
+      e aprimorado por {' '}
+      <a
+        target="_blank"
+        rel="noreferrer"
+        className="underline hover:text-gray-100"
+        href="https://portfolioneilson.netlify.app/"
+      >
+        José Neilson
       </a>
     </div>
   )
