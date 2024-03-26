@@ -22,7 +22,7 @@ Baixe as dependências e rode o projeto.
 npm install
 npm run start
 ```
-![Cover](./.github/runBackInMobile.png) <br />
+![Cover](./.github/runMobile.png) <br />
 E escolha a plataforma de sua preferencia para rodar a aplicação.
 
 ## Executando Back-end na versão Mobile
