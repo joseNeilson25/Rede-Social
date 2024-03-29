@@ -4,22 +4,21 @@ A rede social surgiu a partir de um bootcamp da rocketseat o NLW Space Time, ond
 
 ## Imagens do sistema
 
-## Home
+### Home
 ![Cover](./.github/home.png)
 
-## Home com Login
+### Home com Login
 ![Cover](./.github/homeWithLogin.png)
 
-## Detalhes
+### Detalhes
 ![Cover](./.github/detailsMemory.png)
 
 ## Gerando chaves de autenticação no Github
-Logado em seu Github acesse https://github.com/settings/developers
-Crie um novo OAuth Apps.
+Logado em seu Github acesse https://github.com/settings/developers<br />
+Crie um novo OAuth Apps.<br />
 Gere o OAuth dessa forma.
 ![Cover](./.github/createOAuth.png)
-A chave Client ID já vem pronta. gere uma nova chave secreta clicando em Generate a new client secret.
-
+A chave Client ID já vem pronta, gere uma nova chave secreta clicando no botão "Generate a new client secret".
 
 ## Executando Front-end
 ```sh
