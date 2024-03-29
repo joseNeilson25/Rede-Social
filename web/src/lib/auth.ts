@@ -5,6 +5,7 @@ interface User {
   sub: string
   name: string
   avatarUrl: string
+  bio?: string
 }
 
 export function getUser(): User {

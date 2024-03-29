@@ -21,7 +21,6 @@ export async function usersRoutes(app: FastifyInstance) {
         name: user.name,
         login: user.login,
         avatarUrl: user.avatarUrl,
-        bio: user.bio,
       }
     })
   })
@@ -50,7 +49,7 @@ export async function usersRoutes(app: FastifyInstance) {
         name: z.string(),
         login: z.string(),
         avatarUrl: z.string(),
-        bio: z.string(),
+        bio: z.string().optional(),
     })
 
     const { githubId, name, login, avatarUrl, bio } = bodySchema.parse(request.body)
