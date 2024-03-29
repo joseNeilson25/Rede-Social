@@ -1,5 +1,10 @@
 #Database
 DATABASE_URL="file:./dev.db"
 
-#Github
-GITHUB_CLIENT_SECRET=
+#Github (WEB)
+GITHUB_CLIENT_ID=""
+GITHUB_CLIENT_SECRET=""
+
+#Github (mobile)
+# GITHUB_CLIENT_ID=""
+# GITHUB_CLIENT_SECRET=""
