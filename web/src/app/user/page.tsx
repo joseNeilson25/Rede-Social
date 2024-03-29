@@ -4,6 +4,7 @@ import { cookies } from "next/headers";
 import { getUser } from "@/lib/auth";
 import Link from "next/link";
 import { Edit } from "lucide-react";
+import Memories from "@/components/Memories";
 
 export default async function User() {
   const { name, avatarUrl, sub } = getUser();
@@ -37,6 +38,7 @@ export default async function User() {
         </Link>
       </div>
       <p className="text-sm leading-snug mt-3">{user.data.bio}</p>
+      <Memories />
     </div>
   );
 }
