@@ -5,9 +5,9 @@ import Cookie from "js-cookie";
 
 type User = {
   id: string;
-  coverUrl: string;
   bio: string;
   name: string;
+  coverUrl: string;
 };
 
 export function UpdateUserForm({ user }: { user: User }) {
@@ -33,7 +33,6 @@ export function UpdateUserForm({ user }: { user: User }) {
       `/users/${userData.id}`,
       {
         bio: formData.get("bio"),
-        name: formData.get("name"),
       },
       {
         headers: {
