@@ -1,6 +1,6 @@
 # Rede Social 
 
-A rede social surgiu a partir de um bootcamp da rocketseat o NLW Space Time, onde fizemos um create e um read de memorias. Ao finalizar o bootcamp o instrutor Diego Fernandes da aula deu alguns desafios, tais como finalizar o CRUD e tornar a memória como publica, para todos que fizerem cadastro na plataforma possam visualizar. Eu concluí os desafios, mas acredito que a aplicação pode ir mais longe, daí estou adicionando mais funcionalidades a plataforma, tais como enviar várias imagens na postagem, título e descrição da postagem, comentários nas postagens, perfil pessoal e entre várias outras novas features que irei ir adicionando.
+A rede social surgiu a partir de um bootcamp da rocketseat o NLW Space Time, onde fizemos um create e um read de memorias. Ao finalizar o bootcamp o instrutor Diego Fernandes da aula deu alguns desafios, tais como finalizar o CRUD e tornar a memória como publica, para todos que fizerem cadastro na plataforma possam visualizar e uma página dedicada a vizualização de uma postagem em específica. Eu concluí os desafios, mas acredito que a aplicação pode ir mais longe, daí estou adicionando mais funcionalidades a plataforma, tais como enviar várias imagens em uma única postagem, título e descrição da postagem, comentários nas postagens, perfil pessoal e entre várias outras novas features que irei ir adicionando.
 
 ## Imagens do sistema
 
