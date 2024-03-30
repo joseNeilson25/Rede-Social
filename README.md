@@ -27,6 +27,7 @@ npm run dev
 ```
 Acesse http://localhost:3000 para visualizar a aplicação no front.
 ## Executando Back-end na versão web
+Verifique se em server.ts dentro de src contem o host, caso tenha retire-oe deixe apenas o port.
 ![Cover](./.github/runBackInWeb.png)
 ```sh
 npm install
