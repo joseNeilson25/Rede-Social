@@ -1,5 +1,5 @@
 import dayjs from "dayjs";
-import { Link } from "expo-router";
+import { Link, useRouter } from "expo-router";
 import ptBR from "dayjs/locale/pt-br";
 import { api } from "../../src/lib/api";
 import Icon from "@expo/vector-icons/Feather";
@@ -29,6 +29,7 @@ interface Memory {
 
 export default function UserMemory() {
   const { bottom, top } = useSafeAreaInsets();
+  const router = useRouter()
 
   useEffect(() => {
     loadMemory();
@@ -38,7 +39,7 @@ export default function UserMemory() {
   const [memory, setMemory] = useState<Memory | null>(null);
 
   async function loadMemory() {
-    const token = await SecureStore.getItemAsync("token");
+    const token =await SecureStore.getItemAsync("token");
 
     const response = await api.get(`/memories/${id}`, {
       headers: {
@@ -49,9 +50,25 @@ export default function UserMemory() {
     setMemory(response.data);
   }
 
+  async function deleteMemory() {
+    try {
+       const token = await SecureStore.getItemAsync("token");
+   
+       await api.delete(`/memories/${id}`, {
+         headers: {
+           Authorization: `Bearer ${token}`,
+         },
+       });
+       router.push('/memories');
+    } catch (error) {
+       console.error("Erro ao excluir memória:", error);
+       // Aqui você pode adicionar tratamento de erro, como mostrar uma mensagem ao usuário
+    }
+   }   
+
   if (!memory) {
     return (
-      <View className="flex-1 justify-center content-center ">
+      <View className="flex-1 justify-center items-center text-white">
         <Text>Loading...</Text>
       </View>
     );
@@ -64,6 +81,9 @@ export default function UserMemory() {
     >
       <View className="mt-4 flex-row items-center justify-between">
         <NLWLogo />
+        <TouchableOpacity className="h-10 w-10 items-center justify-center rounded-full bg-red-500" onPress={deleteMemory}>
+            <Icon name="trash" size={16} color="#fff" />
+        </TouchableOpacity>
         <Link href="/memories" asChild>
           <TouchableOpacity className="h-10 w-10 items-center justify-center rounded-full bg-purple-500">
             <Icon name="arrow-left" size={16} color="#fff" />
