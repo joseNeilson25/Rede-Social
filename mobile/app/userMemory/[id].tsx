@@ -7,7 +7,7 @@ import * as SecureStore from "expo-secure-store";
 import { useLocalSearchParams } from "expo-router";
 import React, { useEffect, useState } from "react";
 import NLWLogo from "../../src/assets/nlw-spacetime-logo.svg";
-import { useSafeAreaInsets } from 'react-native-safe-area-context'
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 import {
   View,
   Text,
@@ -28,7 +28,7 @@ interface Memory {
 }
 
 export default function UserMemory() {
-  const { bottom, top } = useSafeAreaInsets()
+  const { bottom, top } = useSafeAreaInsets();
 
   useEffect(() => {
     loadMemory();
@@ -49,17 +49,26 @@ export default function UserMemory() {
     setMemory(response.data);
   }
 
+  if (!memory) {
+    return (
+      <View className="flex-1 justify-center content-center ">
+        <Text>Loading...</Text>
+      </View>
+    );
+  }
+
   return (
-    <ScrollView className="flex-1 px-8" 
-    contentContainerStyle={{ paddingBottom: bottom, paddingTop: top }}
+    <ScrollView
+      className="flex-1 px-8"
+      contentContainerStyle={{ paddingBottom: bottom, paddingTop: top }}
     >
       <View className="mt-4 flex-row items-center justify-between">
+        <NLWLogo />
         <Link href="/memories" asChild>
           <TouchableOpacity className="h-10 w-10 items-center justify-center rounded-full bg-purple-500">
             <Icon name="arrow-left" size={16} color="#fff" />
           </TouchableOpacity>
         </Link>
-        <NLWLogo />
       </View>
       <View key={memory.id} className="space-y-4 mt-4">
         <View className="flex-row items-center gap-2">
