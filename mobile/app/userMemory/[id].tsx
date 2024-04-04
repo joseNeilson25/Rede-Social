@@ -20,26 +20,25 @@ import {
 dayjs.locale(ptBR);
 
 interface Memory {
-  coverUrl: string;
-  excerpt: string;
-  content: string;
-  createdAt: string;
   id: string;
+  content: string;
+  excerpt: string;
+  coverUrl: string;
+  createdAt: string;
 }
 
 export default function UserMemory() {
+  const router = useRouter();
+  const { id } = useLocalSearchParams();
   const { bottom, top } = useSafeAreaInsets();
-  const router = useRouter()
+  const [memory, setMemory] = useState<Memory | null>(null);
 
   useEffect(() => {
     loadMemory();
   }, []);
 
-  const { id } = useLocalSearchParams();
-  const [memory, setMemory] = useState<Memory | null>(null);
-
   async function loadMemory() {
-    const token =await SecureStore.getItemAsync("token");
+    const token = await SecureStore.getItemAsync("token");
 
     const response = await api.get(`/memories/${id}`, {
       headers: {
@@ -51,20 +50,19 @@ export default function UserMemory() {
   }
 
   async function deleteMemory() {
-    try {
-       const token = await SecureStore.getItemAsync("token");
-   
-       await api.delete(`/memories/${id}`, {
-         headers: {
-           Authorization: `Bearer ${token}`,
-         },
-       });
-       router.push('/memories');
-    } catch (error) {
-       console.error("Erro ao excluir memória:", error);
-       // Aqui você pode adicionar tratamento de erro, como mostrar uma mensagem ao usuário
-    }
-   }   
+    const token = await SecureStore.getItemAsync("token");
+
+    await api.delete(`/memories/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    router.push("/memories");
+  }
+
+  async function editMemory() {
+    router.push("/memories");
+  }
 
   if (!memory) {
     return (
@@ -81,12 +79,22 @@ export default function UserMemory() {
     >
       <View className="mt-4 flex-row items-center justify-between">
         <NLWLogo />
-        <TouchableOpacity className="h-10 w-10 items-center justify-center rounded-full bg-red-500" onPress={deleteMemory}>
-            <Icon name="trash" size={16} color="#fff" />
+        <TouchableOpacity
+          className="h-10 w-10 items-center justify-center rounded-full bg-red-500"
+          onPress={deleteMemory}
+        >
+          <Icon name="trash" size={16} color="#fff" />
         </TouchableOpacity>
+
+        <Link href={`/updateMemory/${memory.id}`} asChild>
+          <TouchableOpacity className="h-10 w-10 items-center justify-center rounded-full bg-blue-500">
+            <Icon name="edit" size={16} color="#fff" />
+          </TouchableOpacity>
+        </Link>
+
         <Link href="/memories" asChild>
           <TouchableOpacity className="h-10 w-10 items-center justify-center rounded-full bg-purple-500">
-            <Icon name="arrow-left" size={16} color="#fff" />
+            <Icon name="arrow-right" size={16} color="#fff" />
           </TouchableOpacity>
         </Link>
       </View>
