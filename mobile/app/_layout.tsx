@@ -59,6 +59,7 @@ export default function Layout() {
         <Stack.Screen name="memories" />
         <Stack.Screen name="new" />
         <Stack.Screen name="userMemory/[id]" />
+        <Stack.Screen name="updateMemory/[id]" />
       </Stack>
     </ImageBackground>
   )
