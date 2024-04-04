@@ -8,37 +8,33 @@ import { useRouter } from "next/router";
 
 type Memory = {
   id: string;
-  coverUrl: string;
   content: string;
+  coverUrl: string;
   isPublic: boolean;
 };
 
 export function UpdateMemoryForm({ memory }: { memory: Memory }) {
-  
-  const [content, setContent] = useState(memory.content);
-
-  const memoryData = memory;
   var toggleImg: boolean;
+  const memoryData = memory;
+  const [content, setContent] = useState(memory.content);
 
   useEffect(() => {
     console.log(memoryData);
     if (memoryData) {
       console.log(memoryData.id);
     }
-    toggleImg = false
-
-    
-  }, [memoryData])
+    toggleImg = false;
+  }, [memoryData]);
 
   async function handleUpdateMemory(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const token = Cookie.get("token");
 
+    let coverUrl = memoryData.coverUrl;
     const formData = new FormData(event.currentTarget);
     const fileToUpload = formData.get("coverUrl");
-    let coverUrl = memoryData.coverUrl;
 
-    if(toggleImg === true){
+    if (toggleImg === true) {
       if (fileToUpload) {
         const uploadFormData = new FormData();
         uploadFormData.set("file", fileToUpload);
@@ -70,15 +66,15 @@ export function UpdateMemoryForm({ memory }: { memory: Memory }) {
     setContent(event.target.value);
   };
 
-  function toggleImgStats(){
-    toggleImg = true
+  function toggleImgStats() {
+    toggleImg = true;
   }
 
   return (
     <form onSubmit={handleUpdateMemory} className="flex flex-1 flex-col gap-2">
       <div className="flex items-center gap-4">
         <label
-          onClick={toggleImgStats} 
+          onClick={toggleImgStats}
           htmlFor="media"
           className="flex cursor-pointer items-center gap-1.5 text-sm text-gray-200 hover:text-gray-100"
         >

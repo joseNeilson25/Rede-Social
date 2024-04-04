@@ -43,7 +43,6 @@ export default function NewMemory() {
 
   async function handleCreateMemory() {
     const token = await SecureStore.getItemAsync('token')
-
     let coverUrl = ''
 
     if (preview) {
@@ -64,7 +63,7 @@ export default function NewMemory() {
       coverUrl = uploadResponse.data.fileUrl
     }
 
-    await api.post(
+    const memoryResponse = await api.post(
       '/memories',
       {
         content,
@@ -77,10 +76,9 @@ export default function NewMemory() {
         },
       },
     )
-
     router.push('/memories')
   }
-
+  
   return (
     <ScrollView
       className="flex-1 px-8"
