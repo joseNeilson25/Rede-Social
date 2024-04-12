@@ -5,6 +5,7 @@ import { FormEvent, useEffect, useState } from "react";
 import { api } from "@/lib/api";
 import Cookie from "js-cookie";
 import { useRouter } from "next/router";
+import jwt_decode from "jwt-decode";
 
 type Memory = {
   id: string;
@@ -13,10 +14,20 @@ type Memory = {
   isPublic: boolean;
 };
 
+interface DecodedToken {
+  sub?: string;
+  email?: string;
+  name?: string;
+  iat?: number;
+  exp?: number;
+  [key: string]: any;
+}
+
 export function UpdateMemoryForm({ memory }: { memory: Memory }) {
   var toggleImg: boolean;
   const memoryData = memory;
   const [content, setContent] = useState(memory.content);
+  const [isPublic, setIsPublic] = useState(memory.isPublic);
 
   useEffect(() => {
     console.log(memoryData);
@@ -47,19 +58,23 @@ export function UpdateMemoryForm({ memory }: { memory: Memory }) {
       }
     }
 
-    await api.patch(
-      `/memories/${memoryData.id}`,
-      {
-        coverUrl,
-        content: formData.get("content"),
-        isPublic: formData.get("isPublic"),
-      },
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
+    if (token) {
+      const decodedToken: DecodedToken = jwt_decode(token);
+      await api.put(
+        `/memories/${memoryData.id}`,
+        {
+          coverUrl,
+          content: formData.get("content"),
+          isPublic,
+          userId: decodedToken.sub,
         },
-      }
-    );
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+    }
   }
 
   const handleContentChange = (event: any) => {
@@ -91,6 +106,8 @@ export function UpdateMemoryForm({ memory }: { memory: Memory }) {
             name="isPublic"
             id="isPublic"
             value="true"
+            checked={isPublic}
+            onChange={(e) => setIsPublic(e.target.checked)}
             className="h-4 w-4 rounded border-gray-400 bg-gray-700 text-purple-500"
           />
           Tornar memória pública
