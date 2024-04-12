@@ -10,7 +10,7 @@ export default async function User() {
   const { name, coverUrl, sub } = getUser();
   const token = cookies().get("token")?.value;
 
-  const user = await api.get(`/users/${sub}`, {
+  const user = await api.get(`/user/${sub}`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -21,7 +21,7 @@ export default async function User() {
       <div className="flex items-center gap-3 justify-between">
         <div className="flex items-center gap-3 text-left">
           <Image
-            src={coverUrl}
+            src={user.data.coverUrl}
             width={40}
             height={40}
             alt=""
