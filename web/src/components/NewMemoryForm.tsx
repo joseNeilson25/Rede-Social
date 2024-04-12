@@ -83,8 +83,8 @@ export function NewMemoryForm() {
             type="checkbox"
             name="isPublic"
             id="isPublic"
-            checked={isPublic} // Define o estado atual do checkbox
-            onChange={(e) => setIsPublic(e.target.checked)} // Atualiza o estado quando o checkbox é alterado
+            checked={isPublic}
+            onChange={(e) => setIsPublic(e.target.checked)}
             className="h-4 w-4 rounded border-gray-400 bg-gray-700 text-purple-500"
           />
           Tornar memória pública
