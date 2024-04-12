@@ -7,11 +7,11 @@ export function SignIn() {
           <User className="h-5 w-5 text-gray-500" />
         </div>
         <p>
-          <a className="hover:text-gray-50 underline" href="user/new">
+          <a className="hover:text-gray-50 underline" href="/user/new">
             Crie sua conta
           </a>
           {" "}ou{" "}
-          <a className="hover:text-gray-50 underline" href="user/login">
+          <a className="hover:text-gray-50 underline" href="/user/login">
             faça login
           </a>
           {" "}para salvar suas memórias

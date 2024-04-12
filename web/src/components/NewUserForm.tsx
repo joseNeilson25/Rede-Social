@@ -45,6 +45,7 @@ export function NewUserForm() {
         },
       }
     );
+    router.push("/user/login");
   }
 
   return (

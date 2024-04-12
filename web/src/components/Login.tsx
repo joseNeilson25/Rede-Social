@@ -29,6 +29,7 @@ export function Login() {
   
       const token = response.data.access_token
       Cookie.set('token', token, { expires: 1 })      
+      router.push("/");
     } catch (error) {
       console.error("Erro ao fazer login:", error);
     }
