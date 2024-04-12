@@ -15,13 +15,27 @@ export function NewUserForm() {
 
     const formData = new FormData(event.currentTarget);
 
+    const fileToUpload = formData.get("coverUrl");
+
+    let coverUrl = "";
+
+    if (fileToUpload) {
+      const uploadFormData = new FormData();
+      uploadFormData.set("file", fileToUpload);
+
+      const uploadResponse = await api.post("/file", uploadFormData);
+
+      coverUrl = uploadResponse.data.fileUrl;
+      console.log(coverUrl);
+    }
+
     await api.post(
       "/user",
       {
         githubId: formData.get("githubId"),
         name: formData.get("name"),
         login: formData.get("login"),
-        avatarUrl: formData.get("avatarUrl"),
+        coverUrl,
         email: formData.get("email"),
         password: formData.get("password"),
       },
@@ -35,6 +49,14 @@ export function NewUserForm() {
 
   return (
     <form onSubmit={handleCreateUser} className="flex flex-1 flex-col gap-2">
+      <label
+        htmlFor="media"
+        className="flex cursor-pointer items-center gap-1.5 text-sm text-gray-200 hover:text-gray-100"
+      >
+        <Camera className="h-4 w-4" />
+        Anexar mídia
+      </label>
+      <MediaPicker />
       <input
         name="githubId"
         placeholder="githubId"
@@ -50,11 +72,11 @@ export function NewUserForm() {
         placeholder="login"
         className="w-full m-1 resize-none rounded border-0 bg-transparent p-0 text-lg leading-relaxed text-gray-100 placeholder:text-gray-400 focus:ring-0"
       />
-      <input
-        name="avatarUrl"
-        placeholder="avatarUrl"
+      {/* <input
+        name="coverUrl"
+        placeholder="coverUrl"
         className="w-full m-1 resize-none rounded border-0 bg-transparent p-0 text-lg leading-relaxed text-gray-100 placeholder:text-gray-400 focus:ring-0"
-      />
+      /> */}
       <input
         name="email"
         placeholder="email"

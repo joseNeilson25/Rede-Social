@@ -7,7 +7,7 @@ import { Edit } from "lucide-react";
 import Memories from "@/components/Memories";
 
 export default async function User() {
-  const { name, avatarUrl, sub } = getUser();
+  const { name, coverUrl, sub } = getUser();
   const token = cookies().get("token")?.value;
 
   const user = await api.get(`/users/${sub}`, {
@@ -21,7 +21,7 @@ export default async function User() {
       <div className="flex items-center gap-3 justify-between">
         <div className="flex items-center gap-3 text-left">
           <Image
-            src={avatarUrl}
+            src={coverUrl}
             width={40}
             height={40}
             alt=""
