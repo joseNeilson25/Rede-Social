@@ -25,7 +25,7 @@ export default async function Home() {
 
   const token = cookies().get('token')?.value
 
-  const response = await api.get('/memories', {
+  const response = await api.get(`/memories/public-memories`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
