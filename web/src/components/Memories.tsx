@@ -9,6 +9,7 @@ import ptBR from "dayjs/locale/pt-br";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+import jwt_decode from "jwt-decode";
 
 dayjs.locale(ptBR);
 
@@ -17,6 +18,15 @@ interface Memory {
   coverUrl: string;
   excerpt: string;
   createdAt: string;
+}
+
+interface DecodedToken {
+  sub?: string;
+  email?: string;
+  name?: string;
+  iat?: number;
+  exp?: number;
+  [key: string]: any;
 }
 
 const Memories = () => {
@@ -28,8 +38,10 @@ const Memories = () => {
       return;
     }
 
+    const decodedToken: DecodedToken = jwt_decode(token);
+
     const fetchMemories = async () => {
-      const response = await api.get("/user-memories", {
+      const response = await api.get(`/memories/user-memories/${decodedToken.sub}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
