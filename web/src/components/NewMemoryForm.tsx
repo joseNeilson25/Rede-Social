@@ -1,50 +1,67 @@
-'use client'
+"use client";
 
-import { Camera } from 'lucide-react'
-import { MediaPicker } from './MediaPicker'
-import { FormEvent } from 'react'
-import { api } from '@/lib/api'
-import Cookie from 'js-cookie'
-import { useRouter } from 'next/navigation'
+import { Camera } from "lucide-react";
+import { MediaPicker } from "./MediaPicker";
+import { FormEvent, useState } from "react";
+import { api } from "@/lib/api";
+import Cookie from "js-cookie";
+import { useRouter } from "next/navigation";
+import jwt_decode from "jwt-decode";
+
+interface DecodedToken {
+  sub?: string;
+  email?: string;
+  name?: string;
+  iat?: number;
+  exp?: number;
+  [key: string]: any;
+}
 
 export function NewMemoryForm() {
-  const router = useRouter()
-
+  const router = useRouter();
+  const token = Cookie.get("token");
+  const [isPublic, setIsPublic] = useState(false);
+  
   async function handleCreateMemory(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault()
+    event.preventDefault();
 
-    const formData = new FormData(event.currentTarget)
+    const formData = new FormData(event.currentTarget);
 
-    const fileToUpload = formData.get('coverUrl')
+    const fileToUpload = formData.get("coverUrl");
 
-    let coverUrl = ''
+    let coverUrl = "";
 
     if (fileToUpload) {
-      const uploadFormData = new FormData()
-      uploadFormData.set('file', fileToUpload)
+      const uploadFormData = new FormData();
+      uploadFormData.set("file", fileToUpload);
 
-      const uploadResponse = await api.post('/upload', uploadFormData)
+      const uploadResponse = await api.post("/file", uploadFormData);
 
-      coverUrl = uploadResponse.data.fileUrl
+      coverUrl = uploadResponse.data.fileUrl;
     }
 
-    const token = Cookie.get('token')
+    if (token) {
+      const decodedToken: DecodedToken = jwt_decode(token);
 
-    await api.post(
-      '/memories',
-      {
-        coverUrl,
-        content: formData.get('content'),
-        isPublic: formData.get('isPublic'),
-      },
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
+      console.log("Valor do campo 'sub':", decodedToken.sub);
+
+      await api.post(
+        "/memories",
+        {
+          coverUrl,
+          content: formData.get("content"),
+          isPublic,
+          userId: decodedToken.sub,
         },
-      },
-    )
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
-    router.push('/')
+      router.push("/");
+    }
   }
 
   return (
@@ -62,11 +79,12 @@ export function NewMemoryForm() {
           htmlFor="isPublic"
           className="flex items-center gap-1.5 text-sm text-gray-200 hover:text-gray-100"
         >
-          <input
+        <input
             type="checkbox"
             name="isPublic"
             id="isPublic"
-            value="true"
+            checked={isPublic} // Define o estado atual do checkbox
+            onChange={(e) => setIsPublic(e.target.checked)} // Atualiza o estado quando o checkbox é alterado
             className="h-4 w-4 rounded border-gray-400 bg-gray-700 text-purple-500"
           />
           Tornar memória pública
@@ -89,5 +107,5 @@ export function NewMemoryForm() {
         Salvar
       </button>
     </form>
-  )
+  );
 }
