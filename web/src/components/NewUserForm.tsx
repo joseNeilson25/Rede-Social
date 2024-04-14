@@ -73,11 +73,6 @@ export function NewUserForm() {
         placeholder="login"
         className="w-full m-1 resize-none rounded border-0 bg-transparent p-0 text-lg leading-relaxed text-gray-100 placeholder:text-gray-400 focus:ring-0"
       />
-      {/* <input
-        name="coverUrl"
-        placeholder="coverUrl"
-        className="w-full m-1 resize-none rounded border-0 bg-transparent p-0 text-lg leading-relaxed text-gray-100 placeholder:text-gray-400 focus:ring-0"
-      /> */}
       <input
         name="email"
         placeholder="email"

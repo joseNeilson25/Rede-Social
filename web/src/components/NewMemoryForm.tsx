@@ -43,8 +43,6 @@ export function NewMemoryForm() {
     if (token) {
       const decodedToken: DecodedToken = jwt_decode(token);
 
-      console.log("Valor do campo 'sub':", decodedToken.sub);
-
       await api.post(
         "/memories",
         {
