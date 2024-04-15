@@ -1,3 +1,6 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
 generator client {
   provider = "prisma-client-js"
 }
@@ -12,8 +15,10 @@ model User {
   githubId  String   @unique
   name      String
   login     String
-  avatarUrl String
-  bio      String?
+  coverUrl String
+  bio       String?
+  email     String @unique
+  password  String
   memories  Memory[]
 }
 
