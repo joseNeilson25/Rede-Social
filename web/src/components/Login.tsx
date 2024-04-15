@@ -28,8 +28,9 @@ export function Login() {
       );
   
       const token = response.data.access_token
-      Cookie.set('token', token, { expires: 1 })      
+      Cookie.set('token', token, { expires: 1 })     
       router.push("/");
+      window.location.reload() 
     } catch (error) {
       console.error("Erro ao fazer login:", error);
     }
@@ -53,7 +54,7 @@ export function Login() {
         type="submit"
         className="inline-block self-end rounded-full bg-green-500 px-5 py-3 font-alt text-sm uppercase leading-none text-black hover:bg-green-600"
       >
-        Salvar
+        Login
       </button>
     </form>
   );
