@@ -31,7 +31,7 @@ Verifique se em server.ts dentro de src contem o host, caso tenha retire-oe deix
 ![Cover](./.github/runBackInWeb.png)
 ```sh
 npm install
-npm run dev
+npm run start:dev
 ```
 A aplicação server roda na porta http://localhost:3333.
 
@@ -63,5 +63,5 @@ app
 Baixe as dependências e rode o projeto.
 ```sh
 npm install
-npm run dev
+npm run start:dev
 ```
